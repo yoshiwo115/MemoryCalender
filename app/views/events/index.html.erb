@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<% if (current_user) %>
+  <p>You are logged in as <strong><%= current_user.email %></strong></p>
+  <%= link_to "Logout", logout_path, method: :delete %>
+<% else %>
+  <p>You need to log in</p>
+  <%= link_to "Sign up", new_user_path %>
+  <%= link_to "Login", login_path %>
+<% end %>
+
+<br>
+
+<h1>皆で作り上げる世界の出来事カレンダー</h1>
+<h2>~毎日が記念日~</h2>
+<br>
+
+<div id="calendar"></div>
+<br>
+
+<%= link_to 'New Event', new_event_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Memory</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.title %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
